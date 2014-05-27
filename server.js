@@ -2,6 +2,13 @@ var   express = require('express')
     , app = express.createServer()
     , io  = require('socket.io').listen(app)
     , port = process.env.PORT || 3000;
+    , http = require("http");
+
+http.createServer(function (req, res) {
+    res.setHeader("Content-Type", "text/html");
+    res.write("Hello World!");
+    res.end();
+}).listen(1337);
 
 app.listen(port);
 
@@ -11,6 +18,7 @@ app.configure(function() {
 });
 
 app.get('/', function (req, res) {
+  console.log(__dirname + '/index.html');
   res.sendfile(__dirname + '/index.html');
 });
 
